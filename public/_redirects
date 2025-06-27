@@ -1,6 +1,6 @@
-# Handle Next.js static export routing
+# Handle Next.js dynamic routes for Cloudflare Pages
 /blog/:slug /blog/:slug/index.html 200
 /about /about/index.html 200
 
-# Fallback for any other routes to homepage
+# Fallback for any other routes
 /* /index.html 200

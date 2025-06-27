@@ -1,20 +1,43 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    unoptimized: true, // Required for static export
+    unoptimized: true, // Required for Cloudflare Pages
     domains: ['images.pexels.com', 'nextjsblog123.netlify.app'], // Add external image domains
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'nextjsblog123.netlify.app',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
+        port: '',
+        pathname: '/**',
+      }
+    ]
   },
-  // Enable static exports for Cloudflare Pages
-  output: 'export',
+  // Enable ISR by NOT using static export
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
-  // Disable SWC minification to avoid potential issues
-  swcMinify: false,
-  // Ensure proper asset prefix for static export
-  assetPrefix: '',
-  // Remove deprecated experimental.appDir option
+  // Ensure proper headers for API requests
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=0, must-revalidate',
+          },
+        ],
+      },
+    ];
+  },
   experimental: {
-    // App router is now stable, no need for experimental flag
+    // Enable ISR features
+    isrMemoryCacheSize: 0, // Disable memory cache to always fetch fresh data
   },
 };
 

@@ -5,8 +5,18 @@ import { BlogPost } from '@/lib/types';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
+// Enable ISR with revalidation every 60 seconds
+export const revalidate = 60;
+
 export default async function Home() {
+  console.log('🏠 Homepage: Starting to fetch posts...');
+  const startTime = Date.now();
+  
   const posts = await fetchAllPosts();
+  
+  const fetchTime = Date.now() - startTime;
+  console.log(`🏠 Homepage: Fetched ${posts.length} posts in ${fetchTime}ms`);
+  
   const featuredPost = posts[0];
   const recentPosts = posts.slice(1, 7);
 
@@ -37,8 +47,34 @@ export default async function Home() {
             </div>
           </div>
 
+          {/* API Status Debug - Remove in production */}
+          <div className="max-w-4xl mx-auto mb-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+            <div className="text-sm text-blue-800">
+              <div className="font-semibold mb-2">🔍 API Debug Info:</div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <strong>Total Posts:</strong> {posts.length}
+                </div>
+                <div>
+                  <strong>Featured Post:</strong> {featuredPost ? '✅ Yes' : '❌ None'}
+                </div>
+                <div>
+                  <strong>Recent Posts:</strong> {recentPosts.length}
+                </div>
+              </div>
+              {featuredPost && (
+                <div className="mt-2 p-2 bg-blue-100 rounded">
+                  <strong>Featured:</strong> "{featuredPost.title}" by {featuredPost.author}
+                </div>
+              )}
+              <div className="mt-2 text-xs text-blue-600">
+                Check browser console for detailed API logs
+              </div>
+            </div>
+          </div>
+
           {/* Featured Post */}
-          {featuredPost && (
+          {featuredPost ? (
             <div className="max-w-4xl mx-auto">
               <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover-lift">
                 <div className="md:flex">
@@ -101,6 +137,16 @@ export default async function Home() {
                 </div>
               </div>
             </div>
+          ) : (
+            <div className="max-w-4xl mx-auto text-center p-12 bg-white rounded-2xl shadow-lg">
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No featured content available</h3>
+              <p className="text-gray-500">Content is being loaded from the API...</p>
+            </div>
           )}
         </div>
       </section>
@@ -128,8 +174,8 @@ export default async function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">No stories yet</h3>
-              <p className="text-gray-500">Check back soon for new content!</p>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Loading recent stories...</h3>
+              <p className="text-gray-500">Content is being fetched from the API. Check the debug info above.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

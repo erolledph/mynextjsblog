@@ -8,6 +8,9 @@ import html from 'remark-html';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
+// Enable ISR with revalidation every 60 seconds
+export const revalidate = 60;
+
 // Generate static params for all blog posts
 export async function generateStaticParams() {
   const slugs = await getAllSlugs();
@@ -250,6 +253,3 @@ export default async function BlogPost({ params }: { params: { slug: string } })
     </div>
   );
 }
-
-// Enable ISR with revalidation
-export const revalidate = 300; // Revalidate every 5 minutes
