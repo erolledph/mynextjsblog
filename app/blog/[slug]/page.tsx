@@ -11,9 +11,15 @@ import Footer from '@/components/Footer';
 // Enable ISR with revalidation every 60 seconds
 export const revalidate = 60;
 
+// Add runtime configuration for ISR
+export const dynamic = 'force-static';
+export const dynamicParams = true;
+
 // Generate static params for all blog posts
 export async function generateStaticParams() {
   const slugs = await getAllSlugs();
+  
+  console.log('🏗️ Generating static params for slugs:', slugs.length);
   
   return slugs.map((slug) => ({
     slug: slug,
@@ -56,11 +62,17 @@ async function processMarkdown(markdown: string) {
 }
 
 export default async function BlogPost({ params }: { params: { slug: string } }) {
+  console.log('📄 Blog post page: Fetching post with slug:', params.slug);
+  console.log('🕒 ISR: This post will be revalidated every 60 seconds');
+  
   const post = await fetchPostBySlug(params.slug);
 
   if (!post) {
+    console.log('❌ Post not found for slug:', params.slug);
     notFound();
   }
+
+  console.log('✅ Post found:', post.title, 'by', post.author);
 
   const contentHtml = await processMarkdown(post.content);
 
@@ -82,6 +94,13 @@ export default async function BlogPost({ params }: { params: { slug: string } })
             </svg>
             Back to stories
           </Link>
+
+          {/* ISR Status - Remove in production */}
+          <div className="mb-6 p-3 bg-green-50 rounded-lg border border-green-200">
+            <div className="text-sm text-green-800">
+              <span className="font-semibold">✅ ISR Active:</span> This post updates automatically every 60 seconds
+            </div>
+          </div>
 
           {/* Categories */}
           <div className="flex flex-wrap gap-2 mb-6">

@@ -18,10 +18,10 @@ const nextConfig = {
       }
     ]
   },
-  // For Cloudflare Pages deployment
-  output: 'export',
-  trailingSlash: true,
-  skipTrailingSlashRedirect: true,
+  // Removed static export configuration to enable ISR
+  // output: 'export', // REMOVED - This was preventing ISR from working
+  // trailingSlash: true, // REMOVED - Not needed for ISR
+  // skipTrailingSlashRedirect: true, // REMOVED - Not needed for ISR
 };
 
 module.exports = nextConfig;

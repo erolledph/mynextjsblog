@@ -8,14 +8,19 @@ import Footer from '@/components/Footer';
 // Enable ISR with revalidation every 60 seconds
 export const revalidate = 60;
 
+// Add runtime configuration for ISR
+export const dynamic = 'force-static';
+export const dynamicParams = true;
+
 export default async function Home() {
-  console.log('🏠 Homepage: Starting to fetch posts...');
+  console.log('🏠 Homepage: Starting to fetch posts with ISR...');
   const startTime = Date.now();
   
   const posts = await fetchAllPosts();
   
   const fetchTime = Date.now() - startTime;
   console.log(`🏠 Homepage: Fetched ${posts.length} posts in ${fetchTime}ms`);
+  console.log('🕒 ISR: This page will be revalidated every 60 seconds');
   
   const featuredPost = posts[0];
   const recentPosts = posts.slice(1, 7);
@@ -47,10 +52,10 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* API Status Debug - Remove in production */}
-          <div className="max-w-4xl mx-auto mb-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
-            <div className="text-sm text-blue-800">
-              <div className="font-semibold mb-2">🔍 API Debug Info:</div>
+          {/* ISR Status Info - Remove in production */}
+          <div className="max-w-4xl mx-auto mb-8 p-4 bg-green-50 rounded-lg border border-green-200">
+            <div className="text-sm text-green-800">
+              <div className="font-semibold mb-2">✅ ISR Enabled - Dynamic Content Updates</div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                   <strong>Total Posts:</strong> {posts.length}
@@ -63,12 +68,12 @@ export default async function Home() {
                 </div>
               </div>
               {featuredPost && (
-                <div className="mt-2 p-2 bg-blue-100 rounded">
+                <div className="mt-2 p-2 bg-green-100 rounded">
                   <strong>Featured:</strong> &ldquo;{featuredPost.title}&rdquo; by {featuredPost.author}
                 </div>
               )}
-              <div className="mt-2 text-xs text-blue-600">
-                Check browser console for detailed API logs
+              <div className="mt-2 text-xs text-green-600">
+                🕒 Content automatically updates every 60 seconds without redeployment
               </div>
             </div>
           </div>
@@ -175,7 +180,7 @@ export default async function Home() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Loading recent stories...</h3>
-              <p className="text-gray-500">Content is being fetched from the API. Check the debug info above.</p>
+              <p className="text-gray-500">Content is being fetched from the API with ISR enabled.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
