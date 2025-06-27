@@ -1,8 +1,22 @@
 name = "modern-blog-nextjs"
 compatibility_date = "2025-01-27"
 
-# Cloudflare Pages configuration
-pages_build_output_dir = "out"
-
-# Enable Node.js compatibility for ISR
+# Enable Node.js compatibility for ISR and Next.js runtime
 compatibility_flags = ["nodejs_compat"]
+
+[pages]
+# This line tells Cloudflare Pages to use its special adapter for Next.js.
+framework = "next"
+
+# The build command for Next.js projects.
+build_command = "npm run build"
+
+# Crucially, you must explicitly set the build output directory to .next
+# for Cloudflare Pages, even when using the Next.js framework preset.
+pages_build_output_dir = ".next"
+
+
+# Environment variables for production (if needed)
+[vars]
+# Add any environment variables here if needed
+# EXAMPLE_VAR = "value"
