@@ -1,2 +1,6 @@
-# Fallback for client-side routing
-/*    /index.html   200
+# Handle Next.js static export routing
+/blog/:slug /blog/:slug/index.html 200
+/about /about/index.html 200
+
+# Fallback for any other routes to homepage
+/* /index.html 200
