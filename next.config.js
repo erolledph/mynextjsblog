@@ -18,27 +18,10 @@ const nextConfig = {
       }
     ]
   },
-  // Enable ISR by NOT using static export
+  // For Cloudflare Pages deployment
+  output: 'export',
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
-  // Ensure proper headers for API requests
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=0, must-revalidate',
-          },
-        ],
-      },
-    ];
-  },
-  experimental: {
-    // Enable ISR features
-    isrMemoryCacheSize: 0, // Disable memory cache to always fetch fresh data
-  },
 };
 
 module.exports = nextConfig;

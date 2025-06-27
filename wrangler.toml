@@ -1,9 +1,11 @@
 name = "modern-blog-nextjs"
 compatibility_date = "2025-01-27"
 
+# Cloudflare Pages configuration
+pages_build_output_dir = "out"
+
 [build]
 command = "npm run build"
-publish = ".next"
 
 [[build.environment_variables]]
 NODE_VERSION = "18"

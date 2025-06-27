@@ -64,7 +64,7 @@ export default async function Home() {
               </div>
               {featuredPost && (
                 <div className="mt-2 p-2 bg-blue-100 rounded">
-                  <strong>Featured:</strong> "{featuredPost.title}" by {featuredPost.author}
+                  <strong>Featured:</strong> &ldquo;{featuredPost.title}&rdquo; by {featuredPost.author}
                 </div>
               )}
               <div className="mt-2 text-xs text-blue-600">
