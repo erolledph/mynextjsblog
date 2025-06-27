@@ -3,5 +3,3 @@ compatibility_date = "2025-06-27"
 
 [assets]
 directory = "./out"
-# Serve static files directly without custom routing
-serve_single_page_app = false
