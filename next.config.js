@@ -2,11 +2,11 @@
 const nextConfig = {
   images: {
     unoptimized: true, // Required for Cloudflare Pages
-    domains: ['images.pexels.com', 'nextjsblog123.netlify.app'], // Add external image domains
+    domains: ['images.pexels.com', 'blogform.netlify.app'], // Add external image domains
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'nextjsblog123.netlify.app',
+        hostname: 'blogform.netlify.app',
         port: '',
         pathname: '/**',
       },

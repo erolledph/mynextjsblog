@@ -1,6 +1,6 @@
 import { BlogPost } from './types';
 
-const API_URL = 'https://nextjsblog123.netlify.app/api/content.json';
+const API_URL = 'https://blogform.netlify.app/api/content.json';
 
 export async function fetchAllPosts(): Promise<BlogPost[]> {
   try {
