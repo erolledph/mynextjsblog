@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&display=swap');
+
+:root {
+  --foreground-rgb: 41, 41, 41;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 255, 255, 255;
+  --accent-green: 26, 137, 23;
+  --accent-green-light: 242, 252, 242;
+  --border-light: 230, 230, 230;
+  --text-secondary: 117, 117, 117;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+}
+
+.font-serif {
+  font-family: 'Merriweather', Georgia, serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Smooth transitions */
+* {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Custom prose styles for article content */
+.prose-custom {
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: rgb(41, 41, 41);
+}
+
+.prose-custom h1,
+.prose-custom h2,
+.prose-custom h3,
+.prose-custom h4,
+.prose-custom h5,
+.prose-custom h6 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  color: rgb(41, 41, 41);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.prose-custom h1 {
+  font-size: 2.25rem;
+  margin-top: 0;
+}
+
+.prose-custom h2 {
+  font-size: 1.875rem;
+}
+
+.prose-custom h3 {
+  font-size: 1.5rem;
+}
+
+.prose-custom p {
+  margin-bottom: 1.5rem;
+}
+
+.prose-custom a {
+  color: rgb(var(--accent-green));
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.prose-custom a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.prose-custom blockquote {
+  border-left: 4px solid rgb(var(--accent-green));
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: rgb(var(--text-secondary));
+}
+
+.prose-custom code {
+  background-color: #f4f4f4;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.prose-custom pre {
+  background-color: #f8f8f8;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Reading progress bar */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(26, 137, 23, 0.2);
+  z-index: 1000;
+}
+
+.reading-progress-fill {
+  height: 100%;
+  background: rgb(var(--accent-green));
+  transition: width 0.1s ease;
+}
+
+/* Custom button styles */
+.btn-primary {
+  background: rgb(var(--accent-green));
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: rgb(23, 120, 20);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: rgb(var(--accent-green));
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgb(var(--accent-green));
+  border-radius: 2rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: rgb(var(--accent-green-light));
+}
+
+/* Tag styles */
+.tag {
+  background: rgb(var(--accent-green-light));
+  color: rgb(var(--accent-green));
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  background: rgb(var(--accent-green));
+  color: white;
+}
+
+/* Card shadows */
+.card-shadow {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
+}
+
+.card-shadow:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive text */
+@media (max-width: 768px) {
+  .prose-custom {
+    font-size: 1rem;
+  }
+  
+  .prose-custom h1 {
+    font-size: 1.875rem;
+  }
+  
+  .prose-custom h2 {
+    font-size: 1.5rem;
+  }
+  
+  .prose-custom h3 {
+    font-size: 1.25rem;
+  }
+}
