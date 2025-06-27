@@ -4,7 +4,7 @@ const nextConfig = {
     unoptimized: true, // Required for static export
     domains: ['images.pexels.com', 'nextjsblog123.netlify.app'], // Add external image domains
   },
-  // Enable static exports for Cloudflare Workers
+  // Enable static exports for Cloudflare Pages
   output: 'export',
   trailingSlash: true,
   skipTrailingSlashRedirect: true,

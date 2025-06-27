@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build"
+    "export": "next build",
+    "pages:build": "next build",
+    "pages:deploy": "npx wrangler pages deploy out --project-name=modern-blog-nextjs"
   },
   "dependencies": {
     "@types/node": "20.6.2",

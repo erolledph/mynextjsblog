@@ -1,5 +1,6 @@
 name = "modern-blog-nextjs"
 compatibility_date = "2025-06-27"
 
-[assets]
-directory = "./out"
+# Use Pages instead of Workers for static sites
+[env.production]
+compatibility_date = "2025-06-27"
