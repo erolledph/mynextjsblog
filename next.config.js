@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone', // Add standalone output for better Cloudflare Pages compatibility
   images: {
     unoptimized: true, // Required for Cloudflare Pages
     domains: ['images.pexels.com', 'blogform.netlify.app'], // Add external image domains
