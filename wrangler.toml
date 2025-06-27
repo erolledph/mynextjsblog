@@ -4,12 +4,18 @@ compatibility_date = "2025-01-27"
 # Enable Node.js compatibility for ISR and Next.js runtime
 compatibility_flags = ["nodejs_compat"]
 
-# Cloudflare Pages configuration
 [pages]
-# Build command for Next.js
+# This line tells Cloudflare Pages to use its special adapter for Next.js.
+# This adapter handles the .next build output, ISR, and serverless functions.
+framework = "next"
+
+# The build command remains the same for Next.js projects.
 build_command = "npm run build"
-# Correct output directory for Next.js (not static export)
-build_output_dir = ".next"
+
+# You typically do NOT need to specify build_output_dir when framework = "next"
+# is set, as the adapter knows where to find the output.
+# If you were deploying a purely static site, you'd set this to 'out' or 'public'.
+# For Next.js with ISR, the adapter handles the complex output.
 
 # Environment variables for production (if needed)
 [vars]
