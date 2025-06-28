@@ -2,7 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://modern-blog-nextjs.pages.dev'),
+  metadataBase: new URL('https://mynextjsblog1.pages.dev'),
   title: 'Modern Blog - Insights & Stories',
   description: 'A modern blog featuring insights, tutorials, and stories on technology, development, and more.',
   keywords: ['blog', 'technology', 'development', 'insights', 'tutorials'],
@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     description: 'A modern blog featuring insights, tutorials, and stories on technology, development, and more.',
     type: 'website',
     locale: 'en_US',
+    url: 'https://mynextjsblog1.pages.dev',
   },
   twitter: {
     card: 'summary_large_image',

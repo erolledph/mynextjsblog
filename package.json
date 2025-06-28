@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export"
   },
   "dependencies": {
     "@types/node": "20.6.2",
@@ -23,5 +24,8 @@
     "typescript": "5.2.2",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
