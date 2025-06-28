@@ -8,14 +8,10 @@ import html from 'remark-html';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-// Enable ISR with revalidation every 60 seconds
-export const revalidate = 60;
+// Enable SSR with force-dynamic for individual blog posts
+export const dynamic = 'force-dynamic';
 
-// Add runtime configuration for ISR
-export const dynamic = 'force-static';
-export const dynamicParams = true;
-
-// Generate static params for all blog posts
+// Generate static params for all blog posts (still useful for build optimization)
 export async function generateStaticParams() {
   const slugs = await getAllSlugs();
   
@@ -63,7 +59,7 @@ async function processMarkdown(markdown: string) {
 
 export default async function BlogPost({ params }: { params: { slug: string } }) {
   console.log('📄 Blog post page: Fetching post with slug:', params.slug);
-  console.log('🕒 ISR: This post will be revalidated every 60 seconds');
+  console.log('🔄 SSR: This post is server-rendered on every request');
   
   const post = await fetchPostBySlug(params.slug);
 
@@ -94,13 +90,6 @@ export default async function BlogPost({ params }: { params: { slug: string } })
             </svg>
             Back to stories
           </Link>
-
-          {/* ISR Status - Remove in production */}
-          <div className="mb-6 p-3 bg-green-50 rounded-lg border border-green-200">
-            <div className="text-sm text-green-800">
-              <span className="font-semibold">✅ ISR Active:</span> This post updates automatically every 60 seconds
-            </div>
-          </div>
 
           {/* Categories */}
           <div className="flex flex-wrap gap-2 mb-6">

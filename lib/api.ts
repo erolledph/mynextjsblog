@@ -7,17 +7,12 @@ export async function fetchAllPosts(): Promise<BlogPost[]> {
     console.log('🔄 Fetching posts from:', API_URL);
     
     const response = await fetch(API_URL, {
-      // Enhanced caching strategy for ISR on Cloudflare Pages
-      next: { 
-        revalidate: 60, // Revalidate every 60 seconds
-        tags: ['posts'] // Add cache tags for more granular control
-      },
+      // SSR configuration - no caching, fresh data on every request
+      cache: 'no-store',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'User-Agent': 'Modern-Blog-NextJS-Cloudflare/1.0',
-        // Cloudflare-friendly cache headers
-        'CF-Cache-Status': 'MISS',
+        'User-Agent': 'Modern-Blog-NextJS-SSR/1.0',
       }
     });
     
@@ -63,7 +58,7 @@ export async function fetchAllPosts(): Promise<BlogPost[]> {
     
     console.log('✅ Total posts from API:', data.length);
     console.log('✅ Published posts:', publishedPosts.length);
-    console.log('🕒 ISR on Cloudflare: Content will be revalidated every 60 seconds');
+    console.log('🔄 SSR: Content fetched fresh on every request - no caching');
     
     // Sort by publish date (newest first)
     publishedPosts.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
@@ -80,15 +75,12 @@ export async function fetchPostBySlug(slug: string): Promise<BlogPost | null> {
     console.log('🔍 Fetching post by slug:', slug);
     
     const response = await fetch(API_URL, {
-      next: { 
-        revalidate: 60, // Revalidate every 60 seconds
-        tags: ['posts', `post-${slug}`] // Add specific cache tags
-      },
+      // SSR configuration - no caching, fresh data on every request
+      cache: 'no-store',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'User-Agent': 'Modern-Blog-NextJS-Cloudflare/1.0',
-        'CF-Cache-Status': 'MISS',
+        'User-Agent': 'Modern-Blog-NextJS-SSR/1.0',
       }
     });
     
@@ -109,7 +101,7 @@ export async function fetchPostBySlug(slug: string): Promise<BlogPost | null> {
     );
     
     console.log('🎯 Found post:', post ? `"${post.title}" by ${post.author}` : 'Not found');
-    console.log('🕒 ISR on Cloudflare: Post will be revalidated every 60 seconds');
+    console.log('🔄 SSR: Post fetched fresh on every request - no caching');
     
     return post || null;
   } catch (error) {
@@ -124,7 +116,7 @@ export async function getAllSlugs(): Promise<string[]> {
     const posts = await fetchAllPosts();
     const slugs = posts.map(post => post.slug);
     console.log('📝 Found slugs:', slugs.length, slugs.slice(0, 5));
-    console.log('🏗️ These slugs will be pre-generated at build time on Cloudflare');
+    console.log('🏗️ These slugs will be used for generateStaticParams optimization');
     return slugs;
   } catch (error) {
     console.error('💥 Error fetching slugs:', error);
@@ -135,5 +127,5 @@ export async function getAllSlugs(): Promise<string[]> {
 // Optional: Add a function to manually revalidate cache (for future use)
 export async function revalidateContent() {
   // This function can be used with Next.js revalidateTag if needed
-  console.log('🔄 Manual content revalidation triggered on Cloudflare');
+  console.log('🔄 Manual content revalidation triggered');
 }

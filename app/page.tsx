@@ -5,22 +5,18 @@ import { BlogPost } from '@/lib/types';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-// Enable ISR with revalidation every 60 seconds
-export const revalidate = 60;
-
-// Add runtime configuration for ISR
-export const dynamic = 'force-static';
-export const dynamicParams = true;
+// Enable SSR with force-dynamic - renders on every request
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
-  console.log('🏠 Homepage: Starting to fetch posts with ISR...');
+  console.log('🏠 Homepage: Starting to fetch posts with SSR...');
   const startTime = Date.now();
   
   const posts = await fetchAllPosts();
   
   const fetchTime = Date.now() - startTime;
   console.log(`🏠 Homepage: Fetched ${posts.length} posts in ${fetchTime}ms`);
-  console.log('🕒 ISR: This page will be revalidated every 60 seconds');
+  console.log('🔄 SSR: This page is server-rendered on every request');
   
   const featuredPost = posts[0];
   const recentPosts = posts.slice(1, 7);
@@ -49,32 +45,6 @@ export default async function Home() {
               <button className="btn-secondary text-lg px-8 py-3">
                 Subscribe to Newsletter
               </button>
-            </div>
-          </div>
-
-          {/* ISR Status Info - Remove in production */}
-          <div className="max-w-4xl mx-auto mb-8 p-4 bg-green-50 rounded-lg border border-green-200">
-            <div className="text-sm text-green-800">
-              <div className="font-semibold mb-2">✅ ISR Enabled - Dynamic Content Updates</div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <strong>Total Posts:</strong> {posts.length}
-                </div>
-                <div>
-                  <strong>Featured Post:</strong> {featuredPost ? '✅ Yes' : '❌ None'}
-                </div>
-                <div>
-                  <strong>Recent Posts:</strong> {recentPosts.length}
-                </div>
-              </div>
-              {featuredPost && (
-                <div className="mt-2 p-2 bg-green-100 rounded">
-                  <strong>Featured:</strong> &ldquo;{featuredPost.title}&rdquo; by {featuredPost.author}
-                </div>
-              )}
-              <div className="mt-2 text-xs text-green-600">
-                🕒 Content automatically updates every 60 seconds without redeployment
-              </div>
             </div>
           </div>
 
@@ -180,7 +150,7 @@ export default async function Home() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Loading recent stories...</h3>
-              <p className="text-gray-500">Content is being fetched from the API with ISR enabled.</p>
+              <p className="text-gray-500">Content is being fetched from the API with SSR enabled.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
