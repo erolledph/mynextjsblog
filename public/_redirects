@@ -1,8 +1,0 @@
-# Cloudflare Pages redirects for Next.js
-# Handle dynamic routes and ISR
-
-# Redirect old URLs if needed
-# /old-path/* /new-path/:splat 301
-
-# Fallback for client-side routing
-/* /index.html 200
