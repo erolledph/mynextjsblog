@@ -2,6 +2,9 @@ import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
+// Configure Edge runtime for Cloudflare Pages compatibility
+export const runtime = 'edge';
+
 export default function NotFound() {
   return (
     <div className="min-h-screen bg-white">

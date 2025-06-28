@@ -1,11 +1,13 @@
 name = "modern-blog-nextjs"
 compatibility_date = "2025-01-27"
 
-# Enable Node.js compatibility for ISR and Next.js runtime
+# Enable Node.js compatibility for SSR and Next.js runtime
 compatibility_flags = ["nodejs_compat"]
 
 [build]
 command = "npm run build"
+# Explicitly specify the build output directory for Cloudflare Pages
+pages_build_output_dir = ".next"
 
 [build.environment]
 NODE_VERSION = "18"

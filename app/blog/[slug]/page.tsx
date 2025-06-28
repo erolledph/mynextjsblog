@@ -8,6 +8,9 @@ import html from 'remark-html';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
+// Configure Edge runtime for Cloudflare Pages compatibility
+export const runtime = 'edge';
+
 // Enable SSR with force-dynamic for individual blog posts
 export const dynamic = 'force-dynamic';
 

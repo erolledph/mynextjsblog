@@ -1,10 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable experimental features for Cloudflare Pages
-  experimental: {
-    runtime: 'nodejs',
-  },
-  
   images: {
     unoptimized: true, // Required for Cloudflare Pages
     domains: ['images.pexels.com', 'blogform.netlify.app'],
@@ -23,9 +18,6 @@ const nextConfig = {
       }
     ]
   },
-  
-  // Ensure ISR is enabled (DO NOT use output: 'export')
-  // ISR requires server-side rendering capabilities
   
   // Optimize for Cloudflare Pages
   poweredByHeader: false,
